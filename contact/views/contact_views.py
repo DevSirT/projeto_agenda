@@ -12,6 +12,7 @@ def index(request):
 
     context = {
         'contacts': contacts,
+        'site_title': 'Contatos - '
     }
 
     return render(
@@ -26,11 +27,12 @@ def contact(request, contact_id):
     # if single_contact is None:
     #    raise Http404()
     single_contact = get_object_or_404(Contact, pk=contact_id, show=True)
-
+    contact_name = f'{single_contact.first_name} {single_contact.last_name}'
     # print(contacts.query)
 
     context = {
         'contact': single_contact,
+        'site_title': f'{contact_name} - ',
     }
 
     return render(
