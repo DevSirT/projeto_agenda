@@ -4,6 +4,13 @@ from . import models
 
 
 class ContactForm(forms.ModelForm):
+    picture = forms.ImageField(
+        widget=forms.FileInput(
+            attrs={
+                'accept': 'image/*'
+            }
+        )
+    )
     first_name = forms.CharField(
         widget=forms.TextInput(
             attrs={
@@ -15,18 +22,15 @@ class ContactForm(forms.ModelForm):
         help_text='Texto de ajuda para seu usuário',
     )
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-        # self.fields['first_name'].widget.attrs.update({
-        #     'class': 'classe-a classe-b',
-        #     'placeholder': 'Aqui veio do init',
-        # })
+    # self.fields['first_name'].widget.attrs.update({
+    #     'class': 'classe-a classe-b',
+    #     'placeholder': 'Aqui veio do init',
+    # })
 
     class Meta:
         model = models.Contact
         fields = ('first_name', 'last_name', 'phone', 'email', 'description',
-                  'category',)
+                  'category', 'picture',)
     #   widgets = {
     #     'first_name': forms.TextInput(
     #         attrs={
